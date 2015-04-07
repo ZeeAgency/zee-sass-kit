@@ -1,0 +1,145 @@
+@mixin grid-row($grid: $zee-default-grid) {
+  @include clearfix;
+  // Cache previous values
+  $gutter: false;
+  $outer: false;
+  // Sass scope make it not reusable
+  $breakpoints: grid-get-breakpoints($grid);
+
+  @for $i from 1 through length($breakpoints) {
+    $grid-gutter: grid-nth(map-get($grid, 'gutter'), $i);
+    $grid-outer: grid-nth(map-get($grid, 'outer'), $i);
+
+    // Check if style changed
+    @if $grid-gutter != $gutter or $grid-outer != $outer {
+      // Update the cache
+      $gutter: $grid-gutter;
+      $outer: $grid-outer;
+      $bp: nth($breakpoints, $i);
+
+      @include for-min-width($bp) {
+        @include grid-row-style($gutter, $outer);
+      }
+    }
+  }
+}
+
+@mixin grid-row-style($gutter, $outer) {
+  $half-gutter: $gutter / 2;
+
+  // Outer none = no gutter outside
+  @if $outer == 'none' {
+    margin-left: -$half-gutter;
+    margin-right: -$half-gutter;
+    // Outer simple = gutter outside
+  } @else if $outer == 'simple' {
+    margin-left: $half-gutter;
+    margin-right: $half-gutter;
+  }
+}
+
+@mixin grid-base-cell($gutter) {
+  $half-gutter: $gutter / 2;
+  float: left;
+  margin-left: $half-gutter;
+  margin-right: $half-gutter;
+}
+
+@mixin grid-cell($size: 1, $grid: $zee-default-grid, $index: 1) {
+  @include grid-cell-style($width: grid-nth(map-get($grid, 'width'), $index), $columns: grid-nth(map-get($grid, 'columns'), $index), $gutter: grid-nth(map-get($grid, 'gutter'), $index), $size: $size);
+}
+
+@mixin grid-cell-style($width, $columns, $gutter, $size) {
+  width: $width / $columns * $size - $gutter;
+}
+
+@mixin grid-cells($grid: $zee-default-grid) {
+  $uid: map-get($grid, 'uid');
+  $prefix: map-get($grid, 'prefix');
+  $cells: map-get($grid, 'cells');
+  $columns: map-get($grid, 'columns');
+  // Sass scope make it not reusable
+  $breakpoints: grid-get-breakpoints($grid);
+
+  @for $i from 1 through length($breakpoints) {
+    $bp: nth($breakpoints, $i);
+
+    @include for-min-width($bp) {
+      // Base style fight the bloat
+      $gutter: grid-nth(map-get($grid, 'gutter'), $i);
+      
+      // @if $uid {
+      //   #{$uid + '-' + $bp} {
+      //     @include grid-base-cell($gutter);
+      //   }
+      // }
+      
+      // Cells can be named
+      @if $cells != false {
+        @each $cell-name, $cell-sizes in $cells {
+          $size: grid-nth($cell-sizes, $i);
+
+          // Smart hide
+          @if $size == 0 {
+            > #{$prefix + $cell-name} {
+              display: none;
+            }
+          }
+
+          @if $size > 0 {
+            > #{$prefix + $cell-name} {
+              // TODO : find out why sass is complaining about extend from within media... * /
+              // @if $uid {
+              //   @extend #{$uid + '-' + $bp} !optional;
+              // }
+              
+              display: block;
+              @include grid-base-cell($gutter);
+              @include grid-cell($size: $size, $grid: $grid, $index: $i);
+            }
+          }
+        }
+        // Otherwise cells names are generated from columns
+      } @else {
+        @for $cell-name from 1 through $columns {
+          > #{$prefix + $cell-name} {
+
+            // @if $uid {
+            //   @extend #{$uid + '-' + $bp}; !optional
+            // }
+            @include grid-base-cell($gutter);
+            @include grid-cell($size: $cell-name, $grid: $grid, $index: $i);
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin grid-system($grid: $zee-default-grid) {
+  @if map-get($grid, 'uid') == null {
+    $grid: create-grid($grid);
+  }
+  @include grid-row($grid);
+  @include grid-cells($grid);
+}
+
+@mixin grid-cell-responsive($break: false, $sizes: false, $grid: $zee-default-grid) {
+  @if $break {
+    $i: 0;
+
+    @each $bp in $break {
+      $i: $i + 1;
+
+      @if $bp > 0 {
+        @include for-min-width($bp) {
+          @include grid-cell(nth($sizes, $i), $grid);
+        }
+      }
+
+      @else {
+        @include grid-cell(nth($sizes, $i), $grid);
+      }
+    }
+  }
+}

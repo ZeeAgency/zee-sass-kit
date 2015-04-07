@@ -1,0 +1,50 @@
+@import 'off-canvas.vars';
+@import 'off-canvas.mixins';
+
+@if $zee-output-off-canvas {
+  .off-canvas_outer {
+    @include off-canvas-outer;
+
+    @for $i from 1 through 3 {
+      &.off-canvas--move-left-#{$i} {
+
+        > .off-canvas_inner {
+          @include off-canvas-move-left($factor: $i);
+        }
+
+        > .off-canvas_close {
+          @include off-canvas-close-left;
+        }
+      }
+
+      &.off-canvas--move-right-#{$i} {
+        > .off-canvas_inner {
+          @include off-canvas-move-right($factor: $i);
+        }
+
+        > .off-canvas_close {
+          @include off-canvas-close-right;
+        }
+      }
+    }
+
+    > .off-canvas_close {
+      @include off-canvas-close;
+    }
+  }
+
+  .off-canvas_inner {
+    @include off-canvas-inner;
+    @include clearfix;
+  }
+
+  .off-canvas_left-menu {
+    @include off-canvas-left-menu;
+    background: white;
+  }
+
+  .off-canvas_right-menu {
+    @include off-canvas-right-menu;
+    background: white;
+  }
+}

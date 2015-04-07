@@ -1,0 +1,150 @@
+// Hide
+@mixin hidden {
+	display: none !important;
+	visibility: hidden;
+}
+
+// Hide text only
+@mixin hidden-text {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+// invisible
+@mixin invisible {
+	visibility: hidden;
+}
+
+// Visible hidden
+@mixin vishidden {
+	position: absolute !important;
+	overflow: hidden;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
+// Reset vishidden properties
+@mixin reset-vishidden {
+	position: static !important;
+	overflow: visible;
+	width: auto;
+	height: auto;
+	clip: auto; // Useless ? clip only applies when position: absolute
+}
+
+// Clearfix
+@mixin clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// Private placeholders for mixins ;)
+%_util-display-none {
+	display: none;
+}
+%_util-display-block {
+	display: block;
+}
+
+@mixin visible-for-js-only {
+	@extend %_util-display-none;
+
+	.js & {
+		@extend %_util-display-block;
+	}
+}
+
+@mixin hidden-for-js-only {
+	.js & {
+		@extend %_util-display-none;
+	}
+}
+
+@mixin activable {
+	// @extend %_util-display-none;
+	display: none;
+
+	&.active {
+		// @extend %_util-display-block;
+		display: block;
+	}
+	.no-js &:target {
+		// @extend %_util-display-block;
+		display: block;
+	}
+}
+
+@mixin activable-for-js-only {
+	.js & {
+		@extend %_util-display-none;
+
+		&.active {
+			@extend %_util-display-block;
+		}
+	}
+}
+
+// Respect ratio
+@mixin respect-ratio($ratio, $height: false) {
+	// Lazy ratio calculation with $ratio=$width
+	@if $height {
+		$ratio: $height / $ratio;
+	}
+	@if unitless($ratio) {
+		$ratio: percentage($ratio);
+	}
+	height: 0;
+	padding-bottom: $ratio;
+	overflow: hidden;
+}
+
+@mixin vertical-align-inline-block {
+
+	&:before {
+		content: '';
+		display: inline-block;
+		margin-right: -1px;
+		height: 100%;
+		background: red;
+		width: 0;
+		vertical-align: middle;
+	}
+}
+
+@mixin vertical-align-translate {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin abs-view {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin reset-abs-view {
+  position: static;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  width: auto;
+  height: auto;
+}

@@ -1,1 +1,3 @@
-# zee-sass-kit
+# Zee Sass Kit
+
+Refacto in progress...

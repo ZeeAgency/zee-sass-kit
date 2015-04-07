@@ -1,0 +1,51 @@
+// Base rules
+$base-container:	960px !default;
+$base-spacing:		20px !default;
+$base-columns:		12 !default;
+
+$base-sans-family:	"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$base-serif-family:	Georgia, Times, "Times New Roman", serif !default;
+$base-fixed-family:	Monaco, Consolas, "Lucida Console", monospace !default;
+
+$base-text-color:	#222 !default;
+$base-font-family:	$base-sans-family !default;
+$base-font-size:	16px !default;
+$base-line-height:	1.5 !default;
+
+$base-hx-color:			#111 !default;
+$base-hx-family:		$base-sans-family !default;
+$base-hx-sizes:			4em, 2.5em, 2em, 1.8em, 1.3em, 1em;
+$base-hx-line-height:	1.1, 1.1, 1.3, 1.3, $base-line-height, $base-line-height;
+
+$base-link-color:			blue !default;
+$base-link-hover-color:		darken($base-link-color, 10%) !default;
+$base-link-visited-color:	purple !default;
+
+// Zee base rules
+$zee-base-font-size:	$base-font-size !default;
+$zee-base-line-height:	$base-line-height !default;
+$zee-base-spacing:		$base-spacing !default;
+$zee-base-container:	$base-container !default;
+$zee-base-columns:		$base-columns !default;
+
+// Activate rem support
+$support-rem: true !default;
+
+// Heading tags
+$hx-tags: 'h1, h2, h3, h4, h5, h6' !default;
+
+// Heading classes
+$hx-classes: '.h1, .h2, .h3, .h4, .h5, .h6' !default;
+
+// Default heading reset
+$hx-reset-style: (
+	margin: 0,
+	padding: 0,
+	font-size: 1em,
+	font-weight: normal,
+	font-style: normal,
+) !default;
+
+$a-reset-style: (
+	
+);

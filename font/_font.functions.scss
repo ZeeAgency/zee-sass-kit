@@ -1,0 +1,55 @@
+// Get a font variant from a font collection (sass double list hack)
+// If no $variant given, $font is returned
+//
+// get-font-variant($font [, $variant])
+// @param $font List of components or collection
+// @param $variant Name of the variant to find in the $font collection
+@function get-font-variant($font, $variant: false) {
+  @if $variant == false {
+    @return $font;
+  }
+
+  @each $font-variant in $font {
+    @if nth($font-variant, 1) == $variant {
+      @return $font-variant;
+    }
+  }
+  @return false;
+}
+
+// Get a font's (or variant's) component where component is the position in the list
+// This is for internal purpose only, you should use shortcuts below instead (get-font-family, get-font-weight, ...)
+// If no $component given, $font is considered as the variant and $variant as the component
+//
+// get-font-component($font, $variant [, $component])
+// @param $font List of components or collection
+// @param $variant Name of the variant to find in the $font collection or the component position if no $component
+// @param $component Nth position to pick in the components list
+@function get-font-component($font, $variant, $component: false) {
+  @if $component == false {
+    @return nth($font, $variant);
+  } @else {
+    @return nth(get-font-variant($font, $variant), $component);
+  }
+}
+
+// Get the font-family from a variant or a font collection
+//
+// get-font-variant($font [, $variant])
+@function get-font-family($font, $variant: false) {
+  @return get-font-component($font, $variant, 2);
+}
+
+// Get the font-style from a variant or a font collection
+//
+// get-font-style($font [, $variant])
+@function get-font-style($font, $variant: false) {
+  @return get-font-component($font, $variant, 3);
+}
+
+// Get the font-weight from a variant or a font collection
+//
+// get-font-weight($font [, $variant])
+@function get-font-weight($font, $variant: false) {
+  @return get-font-component($font, $variant, 4);
+}

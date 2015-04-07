@@ -1,0 +1,18 @@
+// Get and apply the style from a font
+// If no $variant given, $font is used
+//
+// apply-font($font [, $variant])
+// @param $font List of components or collection
+// @param $variant Name of the variant to find in the $font collection
+
+@mixin apply-font($font, $variant: false) {
+  @if $variant != false {
+    $font: get-font-variant($font, $variant);
+  }
+
+  @if length($font) > 3 {
+    font-family: nth($font, 2);
+    font-style: nth($font, 3);
+    font-weight: nth($font, 4);
+  }
+}

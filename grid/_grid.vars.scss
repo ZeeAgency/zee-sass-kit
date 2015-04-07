@@ -1,0 +1,15 @@
+@import '../zee.vars';
+
+$zee-output-grid: $zee-output-style !default;
+
+$zee-default-grid: (
+	uid: unique-id(),
+	columns: 12,
+	width: 100%,
+	gutter: 2%,
+	breakpoints: 0,
+	cells: false,
+	outer: 'none',
+	method: 'compat',
+	prefix: '.grid-cell-'
+) !default;

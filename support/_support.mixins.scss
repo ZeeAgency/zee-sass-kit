@@ -1,0 +1,39 @@
+@import "support.vars";
+
+// Set of mixins to conditionnally support browsers
+// By default, those mixins won't output anything. See _vars.scss
+// $support argument is only there to bypass defaults, don't use it...
+
+// Use this INSIDE rules
+@mixin for-oldie($support: $support-oldie) {
+	@if $support { .oldie & { @content; } }
+}
+
+@mixin for-ie6($support: $support-ie6) {
+	@if $support { .ie6 & { @content; } }
+}
+
+@mixin for-ie7($support: $support-ie7) {
+	@if $support { .ie7 & { @content; } }
+}
+
+@mixin for-ie8($support: $support-ie8) {
+	@if $support { .ie8 & { @content; } }
+}
+
+// Use those OUTSIDE rules
+@mixin for-root-oldie($support: $support-oldie) {
+	@if $support { .oldie { @content; } }
+}
+
+@mixin for-root-ie6($support: $support-ie6) {
+	@if $support { .ie6 { @content; } }
+}
+
+@mixin for-root-ie7($support: $support-ie7) {
+	@if $support { .ie7 { @content; } }
+}
+
+@mixin for-root-ie8($support: $support-ie8) {
+	@if $support { .ie8 { @content; } }
+}

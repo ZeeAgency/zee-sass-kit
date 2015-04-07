@@ -1,0 +1,90 @@
+@import "../zee.vars"; // TODO : useless ?
+@import "../maps/maps.module";
+@import "typography.vars";
+@import "typography.functions";
+
+
+// Style every Hx tags
+@mixin hx {
+	#{$hx-classes} {
+		@content;
+	}
+}
+
+@mixin reset-hx {
+	@include hx {
+		@include map2style($hx-reset-style);
+	}
+}
+
+@mixin _anchor-prop($prop, $value) {
+	@if $value {
+		#{$prop}: $value;
+	}
+}
+// Style every <a> states
+@mixin anchor-states($color: false, $color-hover: false, $decoration: false, $decoration-hover: false) {
+	&, &:link, &:active, &:visited, &:focus, &:hover {
+		@include _anchor-prop('color', $color);
+		@include _anchor-prop('text-decoration', $decoration);
+		@content;
+	}
+	&:hover {
+		@include _anchor-prop('color', $color-hover);
+		@include _anchor-prop('text-decoration', $decoration-hover);
+	}
+}
+
+@mixin list-reset {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+// Antialias text
+@mixin font-smoothing($smoothing: antialiased) {
+	-webkit-font-smoothing: $smoothing;
+}
+
+@mixin text-rendering($method: optimizeLegibility) {
+	text-rendering: $method;
+}
+
+@mixin text-hack() {
+	-webkit-text-stroke: 0.35px;
+}
+
+@mixin ellipsis(
+    $height: 1em,
+    $width: 2.5em,
+    $line-height: 1em,
+    $padding-right: 5px
+) {
+    &:before {
+        content: '';
+        float: left;
+        width: 5px;
+        height: $height;
+    }
+    &:after {
+        content: "\02026";
+        @include box-sizing(content-box);
+        float: right;
+        position: relative;
+        top: -$line-height;
+        left: 100%;
+        width: $width;
+        margin-left: -$width;
+        padding-right: $padding-right;
+        text-align: right;
+        // @include background-size(100% 100%);
+        background: white;
+        @include background(linear-gradient(left, rgba(white, 0), rgba(white, 1) 20%, rgba(white, 1) 100%));
+        @content;
+    }
+    & > *:first-child {
+        float: right;
+        width: 100%;
+        margin-left: -5px;
+    }
+}

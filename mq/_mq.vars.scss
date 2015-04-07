@@ -1,0 +1,26 @@
+// Basic Media Queries
+$mq-all:    'all' !default;
+$mq-screen: 'screen' !default;
+$mq-print:  'print' !default;
+
+// HiDPI means Retina... unless it is the inverse ?
+$mq-hidpi: 'only screen and (-webkit-min-device-pixel-ratio: 2),\
+            only screen and (min--moz-device-pixel-ratio: 2),\
+            only screen and (-o-min-device-pixel-ratio: 2/1),\
+            only screen and (min-device-pixel-ratio: 2),\
+            only screen and (min-resolution: 192dpi),\
+            only screen and (min-resolution: 2dppx)' !default;
+
+// Media Query support
+
+// If false, every use of for-*** mixins will be silent
+$mq-support: true !default;
+
+// If false, every use of for-hidpi mixin will be silent
+$mq-support-hidpi: $mq-support !default;
+$mq-support-print: $mq-support !default;
+$mq-include-print: true !default;
+$mq-support-min-width: 0 !default;
+$mq-support-max-width: 500em !default;
+$mq-support-landscape: true !default;
+$mq-support-portrait: true !default;

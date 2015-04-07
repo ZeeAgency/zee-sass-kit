@@ -1,0 +1,34 @@
+@import "typography.vars";
+
+// From Foundation
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+// From Foundation (renamed)
+@function px2em($value, $base-value: $base-font-size)  {
+	$value: strip-unit($value) / strip-unit($base-value) * 1em;
+	@if ($value == 0em) { $value: 0; } // Turn 0em into 0
+	@return $value;
+}
+
+// From Foundation (renamed)
+@function px2ems($values, $base-value: $base-font-size) {
+  $max: length($values);
+
+  @if $max == 1 { @return px2em(nth($values, 1), $base-value); }
+
+  $emValues: ();
+  @for $i from 1 through $max {
+    $emValues: append($emValues, px2em(nth($values, $i), $base-value));
+  }
+  @return $emValues;
+}
+
+@function rem($value, $base-value: $base-font-size) {
+	@if $support-rem {
+		@return strip-unit($value) * 1rem;
+	} @else {
+		@return strip-unit($value) * $base-font-size;
+	}
+}

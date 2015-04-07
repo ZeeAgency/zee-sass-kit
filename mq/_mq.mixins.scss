@@ -1,0 +1,56 @@
+@import 'mq.vars';
+
+@mixin for-min-width($width) {
+  // Use MQ when support and useful
+  @if $mq-support == true and $width != null and $width > 0 {
+    @media only screen and (min-width: #{$width}) {
+      @content;
+    }
+    // Otherwise check the support range
+  } @else if $width != null and $width >= $mq-support-min-width and $width <= $mq-support-max-width {
+    @content;
+  }
+}
+
+// ahem
+@mixin for-max-width($width) {
+  @if $mq-support {
+    @media only screen and (max-width: #{$width}) {
+      @content;
+    }
+  } @else if $width >= $mq-support-max-width {
+    @content;
+  }
+}
+
+@mixin for-orientation($orientation) {
+  @if $mq-support {
+    @media only screen and (orientation: #{$orientation}) {
+      @content;
+    }
+  } @else if $orientation == 'portrait' and $include-orientation-portrait or $orientation == 'landscape' and $include-orientation-landscape {
+    @content;
+  }
+}
+
+@mixin for-print {
+  @if $mq-support-print {
+    @media #{$mq-print} {
+      @content;
+    }
+  } @else if $mq-include-print {
+    @content;
+  }
+}
+
+@mixin for-hidpi {
+  @if $mq-support-hidpi {
+    @if $mq-support {
+      @media #{$hidpi-mq} {
+        @content;
+      }
+    } @else {
+      @content;
+    }
+  }
+}

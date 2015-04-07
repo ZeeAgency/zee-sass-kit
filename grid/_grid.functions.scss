@@ -1,0 +1,33 @@
+// Merge the grid with the default grid and add a unique id
+@function create-grid($grid) {
+  $grid: map-merge($zee-default-grid, $grid);
+  $grid: map-merge($grid, (uid: '%' + unique-id()));
+  @return $grid;
+}
+
+// Always returns a list of breakpoints
+@function grid-get-breakpoints($grid) {
+  // Force breakpoints as a list
+  @return grid-force-list(map-get($grid, 'breakpoints'));
+}
+
+// Force list type
+@function grid-force-list($value) {
+  @if type-of($value) != 'list' {
+    $value: ($value,);
+  }
+  @return $value;
+}
+
+// Like nth() but even if not list and index too large
+@function grid-nth($list, $index: 0) {
+  $list: grid-force-list($list);
+
+  // Check the index
+  @if $index <= length($list) {
+    @return nth($list, $index);
+    // Otherwise, take the last item in the list as a fallback
+  } @else {
+    @return nth($list, length($list));
+  }
+}
