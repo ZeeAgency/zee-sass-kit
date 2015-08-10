@@ -21,6 +21,8 @@ $mq-support-hidpi: $mq-support !default;
 $mq-support-print: $mq-support !default;
 $mq-include-print: true !default;
 $mq-support-min-width: 0 !default;
+$mq-support-min-height: 0 !default;
 $mq-support-max-width: 500em !default;
+$mq-support-max-height: 500em !default;
 $mq-support-landscape: true !default;
 $mq-support-portrait: true !default;

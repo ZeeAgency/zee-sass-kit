@@ -6,7 +6,7 @@
 
 // Style every Hx tags
 @mixin hx {
-	#{$hx-classes} {
+	#{$hx-tags} {
 		@content;
 	}
 }

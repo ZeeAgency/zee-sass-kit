@@ -12,6 +12,18 @@
   }
 }
 
+@mixin for-min-height($height) {
+  // Use MQ when support and useful
+  @if $mq-support == true and $height != null and $height > 0 {
+    @media only screen and (min-height: #{$height}) {
+      @content;
+    }
+    // Otherwise check the support range
+  } @else if $height != null and $height >= $mq-support-min-height and $height <= $mq-support-max-height {
+    @content;
+  }
+}
+
 // ahem
 @mixin for-max-width($width) {
   @if $mq-support {
@@ -19,6 +31,16 @@
       @content;
     }
   } @else if $width >= $mq-support-max-width {
+    @content;
+  }
+}
+
+@mixin for-max-height($height) {
+  @if $mq-support {
+    @media only screen and (max-height: #{$height}) {
+      @content;
+    }
+  } @else if $height >= $mq-support-max-height {
     @content;
   }
 }
@@ -46,7 +68,7 @@
 @mixin for-hidpi {
   @if $mq-support-hidpi {
     @if $mq-support {
-      @media #{$hidpi-mq} {
+      @media #{$mq-hidpi} {
         @content;
       }
     } @else {

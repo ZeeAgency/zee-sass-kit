@@ -120,6 +120,7 @@
 		background: red;
 		width: 0;
 		vertical-align: middle;
+    @content;
 	}
 }
 
@@ -135,8 +136,14 @@
   bottom: 0;
   left: 0;
   right: 0;
-  width: 100%;
-  height: 100%;
+}
+
+@mixin fixed-view {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 @mixin reset-abs-view {
@@ -147,4 +154,8 @@
   right: auto;
   width: auto;
   height: auto;
+}
+
+@mixin reset-fixed-view {
+  @include fixed-view;
 }
