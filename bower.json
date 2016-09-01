@@ -6,7 +6,7 @@
     "Julien Cabanès <julien.c@me.com>"
   ],
   "description": "Zee Agency's Sass Kit",
-  "main": "_zee.module.scss",
+  "main": "_sass_kit.scss",
   "keywords": [
     "zee",
     "sass"
