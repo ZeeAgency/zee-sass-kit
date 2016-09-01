@@ -1,5 +1,0 @@
-@mixin map2style($map) {
-  @each $prop, $value in $map {
-    #{$prop}: $value;
-  }
-}
