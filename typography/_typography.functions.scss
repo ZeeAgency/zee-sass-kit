@@ -7,14 +7,14 @@
 
 // From Foundation (renamed)
 @function px2em($value, $base-value: $zee-base-font-size) {
-	$value: strip-unit($value) / strip-unit($base-value) * 1em;
-	
+  $value: strip-unit($value) / strip-unit($base-value) * 1em;
+  
   // Turn 0em into 0
   @if ($value == 0em) {
     $value: 0;
   }
   
-	@return $value;
+  @return $value;
 }
 
 @function px2ems($values, $base-value: $zee-base-font-size) {
