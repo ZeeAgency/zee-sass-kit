@@ -1,133 +1,138 @@
-// Hide
+@mixin map2style($map) {
+  @each $prop, $value in $map {
+    #{$prop}: $value;
+  }
+}
+
+@mixin before {
+  &:before {
+    content: '';
+    display: block;
+    @content;
+  }
+}
+
+@mixin after {
+  &:after {
+    content: '';
+    display: block;
+    @content;
+  }
+}
+
 @mixin hidden {
-	display: none !important;
-	visibility: hidden;
+  display: none !important;
+  visibility: hidden;
 }
 
-// Hide text only
 @mixin hidden-text {
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-// invisible
 @mixin invisible {
-	visibility: hidden;
+  visibility: hidden;
 }
 
-// Visible hidden
 @mixin vishidden {
-	position: absolute !important;
-	overflow: hidden;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	border: 0;
-	clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
 }
 
-// Reset vishidden properties
 @mixin reset-vishidden {
-	position: static !important;
-	overflow: visible;
-	width: auto;
-	height: auto;
-	clip: auto; // Useless ? clip only applies when position: absolute
+  position: static !important;
+  overflow: visible;
+  width: auto;
+  height: auto;
+  clip: auto;
 }
 
-// Clearfix
 @mixin clearfix {
   *zoom: 1;
+  
   &:before,
   &:after {
     display: table;
-    content: " ";
+    content: '';
     line-height: 0;
   }
+  
   &:after {
     clear: both;
   }
 }
 
-// Private placeholders for mixins ;)
-%_util-display-none {
-	display: none;
-}
-%_util-display-block {
-	display: block;
-}
+@mixin display-for-js-only($display-value: 'block') {
+  display: none;
 
-@mixin visible-for-js-only {
-	@extend %_util-display-none;
-
-	.js & {
-		@extend %_util-display-block;
-	}
+  .js & {
+    display: $display-value;
+  }
 }
 
 @mixin hidden-for-js-only {
-	.js & {
-		@extend %_util-display-none;
-	}
+  .js & {
+    display: none;
+  }
 }
 
-@mixin activable {
-	// @extend %_util-display-none;
-	display: none;
+@mixin activable($display-value: 'block') {
+  display: none;
 
-	&.active {
-		// @extend %_util-display-block;
-		display: block;
-	}
-	.no-js &:target {
-		// @extend %_util-display-block;
-		display: block;
-	}
+  &.active {
+    display: $display-value;
+  }
+  
+  .no-js &:target {
+    display: $display-value;
+  }
 }
 
-@mixin activable-for-js-only {
-	.js & {
-		@extend %_util-display-none;
+@mixin activable-for-js-only($display-value: 'block') {
+  .js & {
+    display: none;
 
-		&.active {
-			@extend %_util-display-block;
-		}
-	}
+    &.active {
+      display: $display-value;
+    }
+  }
 }
 
-// Respect ratio
-@mixin respect-ratio($ratio, $height: false) {
-	// Lazy ratio calculation with $ratio=$width
-	@if $height {
-		$ratio: $height / $ratio;
-	}
-	@if unitless($ratio) {
-		$ratio: percentage($ratio);
-	}
-	height: 0;
-	padding-bottom: $ratio;
-	overflow: hidden;
+@mixin respect-ratio($ratio) {
+  position: relative;
+  
+  &:before {
+    content: '';
+    display: block;
+    height: 0;
+    padding-bottom: $ratio;
+    overflow: hidden;
+  }
 }
 
-@mixin vertical-align-inline-block {
-
-	&:before {
-		content: '';
-		display: inline-block;
-		margin-right: -1px;
-		height: 100%;
-		background: red;
-		width: 0;
-		vertical-align: middle;
-    @content;
-	}
-}
-
-@mixin vertical-align-translate {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+@mixin center-by-translate($horizontal: true, $vertical: true) {
+  @if $horizontal == true and $vertical == true {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+  } @elseif $horizontal == true {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
+  } @elseif $vertical == true {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 @mixin abs-view {
@@ -157,11 +162,5 @@
 }
 
 @mixin reset-fixed-view {
-  @include fixed-view;
-}
-
-@mixin map2style($map) {
-  @each $prop, $value in $map {
-    #{$prop}: $value;
-  }
+  @include reset-abs-view;
 }

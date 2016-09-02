@@ -1,41 +1,41 @@
 @import "utils.mixins";
 
 %hidden {
-	@include hidden;
+  @include hidden;
 }
 
 %hidden-text {
-	@include hidden-text;
+  @include hidden-text;
 }
 
 %invisible {
-	@include invisible;
+  @include invisible;
 }
 
 %vishidden {
-	@include vishidden;
+  @include vishidden;
 }
 
 %reset-vishidden {
-	@include reset-vishidden;
+  @include reset-vishidden;
 }
 
 %clearfix {
-	@include clearfix;
+  @include clearfix;
 }
 
 %activable {
-	@include activable;
+  @include activable;
 }
 
 %activable-for-js-only {
-	@include activable-for-js-only;
+  @include activable-for-js-only;
 }
 
 %visible-for-js-only {
-	@include visible-for-js-only;
+  @include visible-for-js-only;
 }
 
 %hidden-for-js-only {
-	@include hidden-for-js-only;
+  @include hidden-for-js-only;
 }
