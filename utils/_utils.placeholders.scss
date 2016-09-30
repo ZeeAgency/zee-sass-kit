@@ -31,11 +31,3 @@
 %activable-for-js-only {
   @include activable-for-js-only;
 }
-
-%visible-for-js-only {
-  @include visible-for-js-only;
-}
-
-%hidden-for-js-only {
-  @include hidden-for-js-only;
-}

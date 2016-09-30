@@ -32,12 +32,4 @@
   .activable-for-js-only {
     @extend %activable-for-js-only;
   }
-
-  .visible-for-js-only {
-    @extend %visible-for-js-only;
-  }
-
-  .hidden-for-js-only {
-    @extend %hidden-for-js-only;
-  }
 }
