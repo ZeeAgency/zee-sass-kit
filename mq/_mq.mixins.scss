@@ -44,3 +44,125 @@
     @content;
   }
 }
+
+// min-width breakpoint shortcuts
+@mixin for-mobile {
+  @include for-min-width(p2e($mq-mobile)) {
+    @content;
+  }
+}
+
+@mixin for-large-mobile {
+  @include for-min-width(p2e($mq-large-mobile)) {
+    @content;
+  }
+}
+
+@mixin for-extra-large-mobile {
+  @include for-min-width(p2e($mq-extra-large-mobile)) {
+    @content;
+  }
+}
+
+@mixin for-tablet {
+  @include for-min-width(p2e($mq-tablet)) {
+    @content;
+  }
+}
+
+@mixin for-large-tablet {
+  @include for-min-width(p2e($mq-large-tablet)) {
+    @content;
+  }
+}
+
+@mixin for-extra-large-tablet {
+  @include for-min-width(p2e($mq-extra-large-tablet)) {
+    @content;
+  }
+}
+
+@mixin for-desktop {
+  @include for-min-width(p2e($mq-desktop)) {
+    @content;
+  }
+}
+
+@mixin for-large-desktop {
+  @include for-min-width(p2e($mq-large-desktop)) {
+    @content;
+  }
+}
+
+@mixin for-extra-large-desktop {
+  @include for-min-width(p2e($mq-extra-large-desktop)) {
+    @content;
+  }
+}
+
+@mixin for-ultra-large-desktop {
+  @include for-min-width(p2e($mq-ultra-large-desktop)) {
+    @content;
+  }
+}
+
+// max-width breakpoint shortcuts
+@mixin for-less-than-mobile {
+  @include for-max-width(p2e($mq-mobile - 1px)) {
+    @content;
+  }
+}
+
+@mixin for-less-than-large-mobile {
+  @include for-max-width(p2e($mq-large-mobile - 1px)) {
+    @content;
+  }
+}
+
+@mixin for-less-than-extra-large-mobile {
+  @include for-max-width(p2e($mq-extra-large-mobile - 1px)) {
+    @content;
+  }
+}
+
+@mixin for-less-than-tablet {
+  @include for-max-width(p2e($mq-tablet - 1px)) {
+    @content;
+  }
+}
+
+@mixin for-less-than-large-tablet {
+  @include for-max-width(p2e($mq-large-tablet - 1px)) {
+    @content;
+  }
+}
+
+@mixin for-less-than-extra-large-tablet {
+  @include for-max-width(p2e($mq-extra-large-tablet - 1px)) {
+    @content;
+  }
+}
+
+@mixin for-less-than-desktop {
+  @include for-max-width(p2e($mq-desktop - 1px)) {
+    @content;
+  }
+}
+
+@mixin for-less-than-large-desktop {
+  @include for-max-width(p2e($mq-large-desktop - 1px)) {
+    @content;
+  }
+}
+
+@mixin for-less-than-extra-large-desktop {
+  @include for-max-width(p2e($mq-extra-large-desktop - 1px)) {
+    @content;
+  }
+}
+
+@mixin for-less-than-ultra-large-desktop {
+  @include for-max-width(p2e($mq-ultra-large-desktop - 1px)) {
+    @content;
+  }
+}
